@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpn5aloay4ixk"
-path="res://.godot/imported/enemyWalking_1.png-902598647b52eae2465ee15bb048e05f.ctex"
+path="res://.godot/imported/enemyWalking_1.png-5af6eedbe61b701677d490ffdc1e6471.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dodge_the_creeps_2d_assets/art/enemyWalking_1.png"
-dest_files=["res://.godot/imported/enemyWalking_1.png-902598647b52eae2465ee15bb048e05f.ctex"]
+source_file="res://art/enemyWalking_1.png"
+dest_files=["res://.godot/imported/enemyWalking_1.png-5af6eedbe61b701677d490ffdc1e6471.ctex"]
 
 [params]
 
