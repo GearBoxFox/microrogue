@@ -7,10 +7,8 @@ public partial class Main : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		var player = GetNode<Player>("Player");
+		var player = GetNode<player>("Player");
 		var spawn = GetNode<Marker2D>("PlayerSpawn");
-
-		player.Start(spawn.Position);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
