@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class main : Node
+public partial class Main : Node
 {
 	[Export]
 	public PackedScene MobScene { get; set; }
@@ -23,12 +23,18 @@ public partial class main : Node
 	{
 		GetNode<Timer>("ScoreTimer").Stop();
 		GetNode<Timer>("MobTimer").Stop();
+
+		GetNode<Hud>("HUD").ShowGameOver();
 	}
 
 	public void NewGame() {
 		_score = 0;
 
-		var player = GetNode<player>("Player");
+		var hud = GetNode<Hud>("HUD");
+		hud.UpdateScore(_score);
+		hud.ShowMessage("Get Ready!");
+
+		var player = GetNode<Player>("Player");
 		var playerStart = GetNode<Marker2D>("StartPosition");
 		player.Start(playerStart.Position);
 
@@ -38,6 +44,7 @@ public partial class main : Node
 	// Handle score increments
 	public void OnScoreTimerTimeout() {
 		_score++;
+		GetNode<Hud>("HUD").UpdateScore(_score);
 	}
 
 	// Delay before spawning mobs
@@ -54,7 +61,7 @@ public partial class main : Node
 		// obviously Mob and PathFollow2D, since they appear later on the line.
 
 		// Create a new instance of the Mob scene.
-		mob mob = MobScene.Instantiate<mob>();
+		Mob mob = MobScene.Instantiate<Mob>();
 
 		// Choose a random location on Path2D.
 		var mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");

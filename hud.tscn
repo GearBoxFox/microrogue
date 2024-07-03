@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bp2a7ry0pqjf8"]
 
-[ext_resource type="Script" path="res://hud.cs" id="1_ep25k"]
+[ext_resource type="Script" path="res://Hud.cs" id="1_2qot1"]
 [ext_resource type="FontFile" uid="uid://ctntsdo2ec7fs" path="res://fonts/Xolonium-Regular.ttf" id="2_db4lj"]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource("1_ep25k")
+script = ExtResource("1_2qot1")
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 5

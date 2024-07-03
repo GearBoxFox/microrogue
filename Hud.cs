@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class hud : CanvasLayer
+public partial class Hud : CanvasLayer
 {
 	[Signal]
 	public delegate void StartGameEventHandler();
