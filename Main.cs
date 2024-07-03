@@ -21,6 +21,9 @@ public partial class Main : Node
 	// Called when the player gets hit
 	public void GameOver() 
 	{
+		GetNode<AudioStreamPlayer2D>("Music").Stop();
+		GetNode<AudioStreamPlayer2D>("DeathSound").Play();
+
 		GetNode<Timer>("ScoreTimer").Stop();
 		GetNode<Timer>("MobTimer").Stop();
 
@@ -30,15 +33,21 @@ public partial class Main : Node
 	public void NewGame() {
 		_score = 0;
 
+		// update display
 		var hud = GetNode<Hud>("HUD");
 		hud.UpdateScore(_score);
 		hud.ShowMessage("Get Ready!");
 
+		// create player and reset position
 		var player = GetNode<Player>("Player");
 		var playerStart = GetNode<Marker2D>("StartPosition");
 		player.Start(playerStart.Position);
 
 		GetNode<Timer>("StartTimer").Start();
+		GetNode<AudioStreamPlayer2D>("Music").Play();
+
+		// reset old mobs
+		GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
 	}
 
 	// Handle score increments
