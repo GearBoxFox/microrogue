@@ -1,51 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://cerw878sxixvn"]
+[gd_scene load_steps=5 format=3 uid="uid://cerw878sxixvn"]
 
-[ext_resource type="Texture2D" uid="uid://xurnmeplsdrc" path="res://art/playerGrey_up1.png" id="1_lbk02"]
 [ext_resource type="Script" path="res://Player.cs" id="1_y0lla"]
-[ext_resource type="Texture2D" uid="uid://nillc7y8a8qq" path="res://art/playerGrey_up2.png" id="2_mgg6i"]
-[ext_resource type="Texture2D" uid="uid://dh1f8mmud4ttk" path="res://art/playerGrey_walk1.png" id="3_amkfu"]
-[ext_resource type="Texture2D" uid="uid://dtpi8n7ywnu21" path="res://art/playerGrey_walk2.png" id="4_qpu4x"]
+[ext_resource type="Texture2D" uid="uid://qt3uk3iddnb6" path="res://art/player/player.png" id="2_wqnk4"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_1phkk"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_cbbj1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_lbk02")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_mgg6i")
-}],
-"loop": true,
-"name": &"up",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_amkfu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_qpu4x")
+"texture": ExtResource("2_wqnk4")
 }],
 "loop": true,
 "name": &"walk",
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fq4s4"]
-radius = 14.1218
-height = 40.3071
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_186b3"]
+size = Vector2(16.1392, 18.968)
 
 [node name="Player" type="Area2D"]
 script = ExtResource("1_y0lla")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_1phkk")
+sprite_frames = SubResource("SpriteFrames_cbbj1")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.76837e-07, 0)
 scale = Vector2(1.98275, 1.68705)
-shape = SubResource("CapsuleShape2D_fq4s4")
+shape = SubResource("RectangleShape2D_186b3")
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
