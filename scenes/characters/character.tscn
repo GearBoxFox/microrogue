@@ -1,21 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://cerw878sxixvn"]
 
 [ext_resource type="Script" path="res://scripts/characters/Character.cs" id="1_t5hr0"]
-[ext_resource type="Script" path="res://scenes/FSM.cs" id="3_8ltjh"]
+[ext_resource type="Script" path="res://scripts/characters/FSM.cs" id="2_s0ta2"]
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_t5hr0")
 metadata/_edit_group_ = true
 
-[node name="FiniateStateMachine" type="Node" parent="."]
-script = ExtResource("3_8ltjh")
+[node name="FiniteStateMachine" type="Node" parent="."]
+script = ExtResource("2_s0ta2")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimationPlayer" type="AnimatedSprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.76837e-07, 0)
 scale = Vector2(1.98275, 1.68705)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(0.25, 0.25)
-zoom = Vector2(2, 2)

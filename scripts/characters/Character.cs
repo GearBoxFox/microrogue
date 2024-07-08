@@ -13,7 +13,7 @@ public partial class Character : CharacterBody2D
 	public delegate void hpChangedEventHandler(int newHp);
 
 	[Export]
-	public int MaxSpeed { get; set; } = 40;
+	public int MaxSpeed { get; set; } = 300;
 	[Export]
 	public int Acceleration { get; set; } = 100;
 
@@ -28,7 +28,7 @@ public partial class Character : CharacterBody2D
     public override void _Ready()
     {
         StateMachine = GetNode<Node>("FiniteStateMachine");
-		AnimatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite");
+		AnimatedSprite = GetNode<AnimatedSprite2D>("AnimationPlayer");
     }
 
     public override void _Process(double delta)
@@ -39,6 +39,11 @@ public partial class Character : CharacterBody2D
 	{
 		MoveAndSlide();
 		Velocity = Velocity.Normalized() * Mathf.Lerp(Velocity.Length(), Vector2.Zero.Length(), FRICTION);    	
+	}
+
+	public virtual void GetInput()
+	{
+
 	}
 
 	public void Move() {

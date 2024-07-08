@@ -15,7 +15,8 @@ public partial class FSM : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Parent = GetParent<Character>();
+		Console.WriteLine("FSM Ready");
+		Parent = GetParent<Player>();
 		AnimationPlayer = Parent.GetNode<AnimatedSprite2D>("AnimationPlayer");
 	}
 
@@ -25,51 +26,50 @@ public partial class FSM : Node
 		if (State != -1) 
 		{
 			// process and update state
-			stateLogic(delta);
-			int transition = getTransition();
+			StateLogic(delta);
+			int transition = GetTransition();
 
 			if (transition != -1) 
 			{
-				setState(transition);
+				SetState(transition);
 			}
 		}
 	}
 
 	// process state
-	protected void stateLogic(double delta) 
+	public virtual void StateLogic(double delta) 
 	{
-		return;
 	}
 
 	// get next state
-	protected int getTransition()
+	public virtual int GetTransition()
 	{
 		return -1;
 	}
 
 	// add state to state dictionary
-	protected void addState(string state) 
+	public void AddState(string state) 
 	{
 		States.Add(state, States.Count);
 	}
 
 	// set the current state
-	public void setState(int newState) 
+	public void SetState(int newState) 
 	{
 		exitState(State);
 		PreviousState = State;
 		State = newState;
-		enterState(State);
+		EnterState(State);
 	}
 
 	// enter a new state
-	protected void enterState(int state)
+	public virtual void EnterState(int state)
 	{
 		return;
 	}
 
 	// exit an old state
-	protected void exitState(int state) 
+	public virtual void exitState(int state) 
 	{
 		return;
 	}

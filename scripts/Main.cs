@@ -8,7 +8,6 @@ public partial class Main : Node
 	public override void _Ready()
 	{
 		var player = GetNode<Character>("Player");
-		var spawn = GetNode<Marker2D>("PlayerSpawn");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
