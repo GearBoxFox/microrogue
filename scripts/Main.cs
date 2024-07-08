@@ -7,7 +7,7 @@ public partial class Main : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		var player = GetNode<player>("Player");
+		var player = GetNode<Character>("Player");
 		var spawn = GetNode<Marker2D>("PlayerSpawn");
 	}
 

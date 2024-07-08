@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://m7hbql4bbe74"]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_7qk7v"]
-[ext_resource type="PackedScene" uid="uid://cerw878sxixvn" path="res://scenes/player.tscn" id="2_bcvxu"]
+[ext_resource type="PackedScene" uid="uid://cerw878sxixvn" path="res://scenes/characters/character.tscn" id="2_bcvxu"]
 [ext_resource type="Texture2D" uid="uid://8vgbopvcxvud" path="res://assets/microroguetileset.png" id="3_vta5t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_684yx"]
@@ -24,7 +24,10 @@ script = ExtResource("1_7qk7v")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -4.0
+offset_left = 288.0
+offset_top = 160.0
+offset_right = 608.0
+offset_bottom = 208.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
