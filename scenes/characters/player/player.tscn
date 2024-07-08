@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://bh61iiy2j8w41"]
+
+[ext_resource type="PackedScene" uid="uid://cerw878sxixvn" path="res://scenes/characters/character.tscn" id="1_we6rr"]
+[ext_resource type="Texture2D" uid="uid://qt3uk3iddnb6" path="res://assets/player/player.png" id="2_45oyj"]
+[ext_resource type="Script" path="res://scripts/characters/player/Player.cs" id="2_prlkl"]
+[ext_resource type="Texture2D" uid="uid://dsj6qu7c2gd13" path="res://assets/player/playerhurt1.png" id="3_nm35q"]
+[ext_resource type="Texture2D" uid="uid://dl3w5p2qtyleo" path="res://assets/player/playerhurt2.png" id="4_okhbv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rsril"]
+load_path = "res://.godot/imported/playerhurt3.png-f1cb3bb5c229bbe4e31e3d57b8ee5249.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_om308"]
+load_path = "res://.godot/imported/playerhurt4.png-ce4bc3719e51bc9eba8c289c04f73537.ctex"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0l0me"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nm35q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_okhbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_rsril")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_om308")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_rsril")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_om308")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nm35q")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_45oyj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5mw4"]
+size = Vector2(16.1392, 18.968)
+
+[node name="Player" instance=ExtResource("1_we6rr")]
+script = ExtResource("2_prlkl")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_0l0me")
+animation = &"hurt"
+frame = 6
+frame_progress = 1.0
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(-4.76837e-07, 0)
+shape = SubResource("RectangleShape2D_o5mw4")
