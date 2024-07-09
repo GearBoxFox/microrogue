@@ -10,6 +10,9 @@ public partial class Player : Character
     public AnimationPlayer SwordAnimationPlayer;
     public Sprite2D AttackIndicator;
 
+    private bool _useKeyboard = true;
+    private Vector2 _prevAimPosition =Vector2.Left;
+
     public override void _Ready()
     {
         base._Ready();
@@ -22,21 +25,48 @@ public partial class Player : Character
 
     public override void _Process(double delta)
     {
-        Vector2 mouseDirection = GetGlobalMousePosition() - GlobalPosition;
-
-        // attempt to let the cursor move closer than the set radius
-        if (Math.Abs(mouseDirection.Length()) > 1.0) {
-            mouseDirection = mouseDirection.Normalized();
+        Vector2 aimVector = Vector2.Zero;
+        if (_useKeyboard)
+        {
+            aimVector = GetGlobalMousePosition() - GlobalPosition;
+        } 
+        else 
+        {
+            aimVector = Input.GetVector("aim_left", "aim_right", "aim_up", "aim_down");
         }
 
-        Sword.Rotation = mouseDirection.Angle();
+        if (aimVector == Vector2.Zero) 
+        {
+            // use last found aim angle
+            aimVector = _prevAimPosition;
+        }
 
-        AttackIndicator.Position = mouseDirection * IndicatorDistance;
+        Vector2 indicatorVec = Vector2.FromAngle(aimVector.Angle());
+        AttackIndicator.Position = indicatorVec * IndicatorDistance;
+
+        Sword.Rotation = aimVector.Angle();
+
+        _prevAimPosition = aimVector;
 
         // Handle attack animation
         if (Input.IsActionPressed("attack") && !SwordAnimationPlayer.IsPlaying()) {
             Sword.Show();
             SwordAnimationPlayer.Play("attack");
+        }
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        // check if using mouse or controller
+        if (@event is InputEventKey or InputEventMouse) 
+        {
+            AttackIndicator.Hide();
+            _useKeyboard = true;
+        }
+        else if (@event is InputEventJoypadButton or InputEventJoypadMotion) 
+        {
+            AttackIndicator.Show();
+            _useKeyboard = false;
         }
     }
 
