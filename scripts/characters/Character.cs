@@ -13,7 +13,7 @@ public partial class Character : CharacterBody2D
 	public delegate void hpChangedEventHandler(int newHp);
 
 	[Export]
-	public int MaxSpeed { get; set; } = 300;
+	public int MaxSpeed { get; set; } = 30;
 	[Export]
 	public int Acceleration { get; set; } = 100;
 

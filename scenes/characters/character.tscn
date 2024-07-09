@@ -10,8 +10,8 @@ metadata/_edit_group_ = true
 [node name="FiniteStateMachine" type="Node" parent="."]
 script = ExtResource("2_s0ta2")
 
-[node name="AnimationPlayer" type="AnimatedSprite2D" parent="."]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.76837e-07, 0)
 scale = Vector2(1.98275, 1.68705)
+
+[node name="AnimationPlayer" type="AnimatedSprite2D" parent="."]

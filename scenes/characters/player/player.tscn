@@ -1,11 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://bh61iiy2j8w41"]
+[gd_scene load_steps=12 format=3 uid="uid://bh61iiy2j8w41"]
 
 [ext_resource type="PackedScene" uid="uid://cerw878sxixvn" path="res://scenes/characters/character.tscn" id="1_we6rr"]
-[ext_resource type="Texture2D" uid="uid://qt3uk3iddnb6" path="res://assets/player/player.png" id="2_45oyj"]
 [ext_resource type="Script" path="res://scripts/characters/player/Player.cs" id="2_prlkl"]
 [ext_resource type="Script" path="res://scripts/characters/player/PlayerFSM.cs" id="3_exdy5"]
 [ext_resource type="Texture2D" uid="uid://dsj6qu7c2gd13" path="res://assets/player/playerhurt1.png" id="3_nm35q"]
 [ext_resource type="Texture2D" uid="uid://dl3w5p2qtyleo" path="res://assets/player/playerhurt2.png" id="4_okhbv"]
+[ext_resource type="Script" path="res://addons/trail_2d/trail_2d.gd" id="5_ou5il"]
+[ext_resource type="Texture2D" uid="uid://by418hgrrtv3d" path="res://assets/player/playersword.png" id="7_4rwub"]
+[ext_resource type="Texture2D" uid="uid://buglieitmu7fl" path="res://assets/attackindicator.png" id="7_p1ubn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5mw4"]
+size = Vector2(16.1392, 18.968)
+
+[sub_resource type="Curve" id="Curve_cdgww"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0673077, 0.404034), 0.0, -0.433191, 0, 1, Vector2(1, 0), -0.433191, 0.0, 1, 0]
+point_count = 3
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_66gmn"]
 animations = [{
@@ -37,26 +46,48 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_45oyj")
+"texture": ExtResource("3_nm35q")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5mw4"]
-size = Vector2(16.1392, 18.968)
-
 [node name="Player" instance=ExtResource("1_we6rr")]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("2_prlkl")
+IndicatorDistance = 50.0
+MaxSpeed = 40
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("3_exdy5")
 
-[node name="AnimationPlayer" parent="." index="1"]
-sprite_frames = SubResource("SpriteFrames_66gmn")
-animation = &"hurt"
-
-[node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(-4.76837e-07, 0)
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
 shape = SubResource("RectangleShape2D_o5mw4")
+
+[node name="Sword" type="Node2D" parent="." index="2"]
+
+[node name="Node" type="Node2D" parent="Sword" index="0"]
+rotation = -1.5708
+scale = Vector2(1.5, 1.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sword/Node" index="0"]
+position = Vector2(2, -4)
+texture = ExtResource("7_4rwub")
+
+[node name="Marker2D" type="Marker2D" parent="Sword/Node" index="1"]
+position = Vector2(16.6667, -17.3333)
+
+[node name="Trail2D" type="Line2D" parent="Sword/Node/Marker2D" index="0"]
+unique_name_in_owner = true
+width_curve = SubResource("Curve_cdgww")
+script = ExtResource("5_ou5il")
+
+[node name="AttackIndicator" type="Sprite2D" parent="." index="3"]
+texture = ExtResource("7_p1ubn")
+
+[node name="AnimationPlayer" parent="." index="4"]
+sprite_frames = SubResource("SpriteFrames_66gmn")
+animation = &"idle"
