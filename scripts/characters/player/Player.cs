@@ -7,13 +7,17 @@ public partial class Player : Character
     public float IndicatorDistance { set; get; } = 50;
 
     public Node2D Sword;
+    public AnimationPlayer SwordAnimationPlayer;
     public Sprite2D AttackIndicator;
 
     public override void _Ready()
     {
         base._Ready();
         Sword = GetNode<Node2D>("Sword");
+        SwordAnimationPlayer = Sword.GetNode<AnimationPlayer>("SwordAnimationPlayer");
         AttackIndicator = GetNode<Sprite2D>("AttackIndicator");
+
+        Sword.Hide();
     }
 
     public override void _Process(double delta)
@@ -25,11 +29,26 @@ public partial class Player : Character
             mouseDirection = mouseDirection.Normalized();
         }
 
+        Sword.Rotation = mouseDirection.Angle();
+
         AttackIndicator.Position = mouseDirection * IndicatorDistance;
+
+        // Handle attack animation
+        if (Input.IsActionPressed("attack") && !SwordAnimationPlayer.IsPlaying()) {
+            Sword.Show();
+            SwordAnimationPlayer.Play("attack");
+        }
     }
 
     public override void GetInput()
     {
         MoveDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+    }
+
+    public void OnAnimationFinished(string animationName) {
+        if (animationName == "attack") {
+            Sword.Hide();
+            Sword.GetNode<Node2D>("Node").RotationDegrees = 0;
+        }
     }
 }
