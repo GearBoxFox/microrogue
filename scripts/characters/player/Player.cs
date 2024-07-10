@@ -44,7 +44,10 @@ public partial class Player : Character
         Vector2 indicatorVec = Vector2.FromAngle(aimVector.Angle());
         AttackIndicator.Position = indicatorVec * IndicatorDistance;
 
-        Sword.Rotation = aimVector.Angle();
+        if (!SwordAnimationPlayer.IsPlaying()) 
+        {
+            Sword.Rotation = aimVector.Angle();
+        }
 
         _prevAimPosition = aimVector;
 
@@ -62,11 +65,13 @@ public partial class Player : Character
         {
             AttackIndicator.Hide();
             _useKeyboard = true;
+            Input.MouseMode = Input.MouseModeEnum.Visible;
         }
         else if (@event is InputEventJoypadButton or InputEventJoypadMotion) 
         {
             AttackIndicator.Show();
             _useKeyboard = false;
+            Input.MouseMode = Input.MouseModeEnum.Hidden;
         }
     }
 
