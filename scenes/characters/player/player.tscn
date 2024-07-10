@@ -141,11 +141,10 @@ shape = SubResource("RectangleShape2D_o5mw4")
 rotation = 3.26726
 
 [node name="Node" type="Node2D" parent="Sword" index="0"]
-rotation = 3.14159
 scale = Vector2(1.5, 1.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sword/Node" index="0"]
-position = Vector2(-4, -2)
+position = Vector2(5.96046e-08, 5.96046e-08)
 rotation = -0.785398
 texture = ExtResource("7_4rwub")
 
