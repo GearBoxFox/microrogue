@@ -1,10 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpw34anyvkcvi"]
+[gd_scene load_steps=6 format=3 uid="uid://cpw34anyvkcvi"]
 
 [ext_resource type="PackedScene" uid="uid://wqad6tofgy06" path="res://scenes/characters/enemies/enemy.tscn" id="1_4r2nl"]
+[ext_resource type="Script" path="res://scripts/characters/enemies/flyingenemy/FlyingEnemyFSM.cs" id="2_csnoh"]
+[ext_resource type="Texture2D" uid="uid://buglieitmu7fl" path="res://assets/attackindicator.png" id="2_ux0ea"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k4fd1"]
+radius = 3.08361
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qh1qc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ux0ea")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="FlyingEnemy" instance=ExtResource("1_4r2nl")]
+
+[node name="FiniteStateMachine" parent="." index="0"]
+script = ExtResource("2_csnoh")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_k4fd1")
 
 [node name="AnimationPlayer" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_qh1qc")

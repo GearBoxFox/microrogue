@@ -15,7 +15,7 @@ public partial class FSM : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Parent = GetParent<Player>();
+		Parent = GetParent<Character>();
 		AnimationPlayer = Parent.GetNode<AnimatedSprite2D>("AnimationPlayer");
 	}
 

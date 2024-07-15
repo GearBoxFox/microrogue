@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Enemy : Character
@@ -19,19 +20,21 @@ public partial class Enemy : Character
 	{
 	}	
 
-	public void Chase()
+	public override void GetInput()
 	{
-		if (!NavigationAgent.IsTargetReached())
+		if (!NavigationAgent.IsTargetReached() && NavigationAgent != null)
 		{
 			var VecToNextPoint = NavigationAgent.GetNextPathPosition() - GlobalPosition;
 			MoveDirection = VecToNextPoint;
 
-			if (VecToNextPoint.X > 0.0 && AnimatedSprite.FlipH)
-			{
-				AnimatedSprite.FlipH = false;
-			} else if (VecToNextPoint.X < 0.0 && !AnimatedSprite.FlipH) {
-				AnimatedSprite.FlipH = true;
-			}
+			GD.Print(VecToNextPoint);
+
+			// if (VecToNextPoint.X > 0.0 && AnimatedSprite.FlipH)
+			// {
+			// 	AnimatedSprite.FlipH = false;
+			// } else if (VecToNextPoint.X < 0.0 && !AnimatedSprite.FlipH) {
+			// 	AnimatedSprite.FlipH = true;
+			// }
 		}
 	}
 
