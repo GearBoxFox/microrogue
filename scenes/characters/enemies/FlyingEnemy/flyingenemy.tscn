@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpw34anyvkcvi"]
+
+[ext_resource type="PackedScene" uid="uid://wqad6tofgy06" path="res://scenes/characters/enemies/enemy.tscn" id="1_4r2nl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qh1qc"]
+
+[node name="FlyingEnemy" instance=ExtResource("1_4r2nl")]
+
+[node name="AnimationPlayer" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_qh1qc")

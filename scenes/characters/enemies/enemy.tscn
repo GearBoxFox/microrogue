@@ -4,9 +4,15 @@
 [ext_resource type="Script" path="res://scenes/characters/enemies/Enemy.cs" id="2_iv6pt"]
 
 [node name="Enemy" instance=ExtResource("1_ddfi7")]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("2_iv6pt")
 
 [node name="PathTimer" type="Timer" parent="." index="3"]
+wait_time = 0.5
+autostart = true
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="4"]
+[node name="NavigationAgent" type="NavigationAgent2D" parent="." index="4"]
 navigation_layers = 8
+
+[connection signal="timeout" from="PathTimer" to="." method="OnPathTimerTimeout"]
