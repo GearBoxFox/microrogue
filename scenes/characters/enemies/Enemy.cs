@@ -27,8 +27,6 @@ public partial class Enemy : Character
 			var VecToNextPoint = NavigationAgent.GetNextPathPosition() - GlobalPosition;
 			MoveDirection = VecToNextPoint;
 
-			GD.Print(VecToNextPoint);
-
 			// if (VecToNextPoint.X > 0.0 && AnimatedSprite.FlipH)
 			// {
 			// 	AnimatedSprite.FlipH = false;
