@@ -219,6 +219,7 @@ script = ExtResource("3_5hj16")
 shape = SubResource("RectangleShape2D_o5mw4")
 
 [node name="Sword" type="Node2D" parent="." index="2"]
+visible = false
 
 [node name="Node" type="Node2D" parent="Sword" index="0"]
 scale = Vector2(1.5, 1.5)
