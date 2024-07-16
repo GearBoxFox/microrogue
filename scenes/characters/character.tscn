@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/characters/FSM.gd" id="2_34p6w"]
 
 [node name="Character" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_p2d7v")
 metadata/_edit_group_ = true
 
