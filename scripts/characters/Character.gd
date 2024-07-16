@@ -24,5 +24,8 @@ func move() -> void:
 	
 func take_damage(dam: int, dir: Vector2, force: int) -> void:
 	hp -= dam
-	state_machine.set_state(state_machine.states.hurt)
+	if hp <= 0:
+		state_machine.set_state(state_machine.states.dead)
+	else:
+		state_machine.set_state(state_machine.states.hurt)
 	velocity += dir * force
