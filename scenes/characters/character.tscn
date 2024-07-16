@@ -1,17 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://cerw878sxixvn"]
 
-[ext_resource type="Script" path="res://scripts/characters/Character.cs" id="1_t5hr0"]
-[ext_resource type="Script" path="res://scripts/characters/FSM.cs" id="2_s0ta2"]
+[ext_resource type="Script" path="res://scripts/characters/Character.gd" id="1_p2d7v"]
+[ext_resource type="Script" path="res://scripts/characters/FSM.gd" id="2_34p6w"]
 
 [node name="Character" type="CharacterBody2D"]
-script = ExtResource("1_t5hr0")
+script = ExtResource("1_p2d7v")
 metadata/_edit_group_ = true
 
 [node name="FiniteStateMachine" type="Node" parent="."]
-script = ExtResource("2_s0ta2")
+script = ExtResource("2_34p6w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.76837e-07, 0)
 scale = Vector2(1.98275, 1.68705)
 
-[node name="AnimationPlayer" type="AnimatedSprite2D" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

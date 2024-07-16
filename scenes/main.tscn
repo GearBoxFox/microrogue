@@ -1,6 +1,5 @@
 [gd_scene load_steps=10 format=3 uid="uid://m7hbql4bbe74"]
 
-[ext_resource type="Script" path="res://scripts/Main.cs" id="1_7qk7v"]
 [ext_resource type="Texture2D" uid="uid://b5m7p3ysno6m0" path="res://assets/Micro Roguelike/Tilemap/colored_tilemap_packed.png" id="2_3odoq"]
 [ext_resource type="PackedScene" uid="uid://bh61iiy2j8w41" path="res://scenes/characters/player/player.tscn" id="3_l7mg7"]
 [ext_resource type="PackedScene" uid="uid://cpw34anyvkcvi" path="res://scenes/characters/enemies/FlyingEnemy/flyingenemy.tscn" id="3_ttw7y"]
@@ -78,7 +77,6 @@ texture_region_size = Vector2i(8, 8)
 0:1/0/physics_layer_0/angular_velocity = 0.0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, -2, -4, -2, 4, -4, 4)
 1:1/0 = 0
-1:1/0/terrain = 0
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
 1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_80hql")
@@ -541,8 +539,64 @@ physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 8
 sources/1 = SubResource("TileSetAtlasSource_e1i4h")
 
+[sub_resource type="CSharpScript" id="CSharpScript_o7fgp"]
+script/source = "using System;
+using Godot;
+
+public partial class Enemy : Character
+{
+	public CharacterBody2D Player;
+	public NavigationAgent2D NavigationAgent;
+	public Timer PathTimer;
+
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		Player = GetTree().CurrentScene.GetNode<CharacterBody2D>(\"Player\");
+		PathTimer = GetNode<Timer>(\"PathTimer\");
+		NavigationAgent = GetNode<NavigationAgent2D>(\"NavigationAgent\");
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}	
+
+	public override void GetInput()
+	{
+		if (!NavigationAgent.IsTargetReached() && NavigationAgent != null)
+		{
+			var VecToNextPoint = NavigationAgent.GetNextPathPosition() - GlobalPosition;
+			MoveDirection = VecToNextPoint;
+
+			// if (VecToNextPoint.X > 0.0 && AnimatedSprite.FlipH)
+			// {
+			// 	AnimatedSprite.FlipH = false;
+			// } else if (VecToNextPoint.X < 0.0 && !AnimatedSprite.FlipH) {
+			// 	AnimatedSprite.FlipH = true;
+			// }
+		}
+	}
+
+	public void OnPathTimerTimeout()
+	{
+		if (Player != null)
+		{
+				GetPathToPlayer();
+		} else {
+			PathTimer.Stop();
+			MoveDirection = Vector2.Zero;
+		}
+	}
+
+	public void GetPathToPlayer() 
+	{
+		NavigationAgent.TargetPosition = Player.Position;
+	}
+}
+"
+
 [node name="Main" type="Node"]
-script = ExtResource("1_7qk7v")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_6ccyh")
@@ -558,9 +612,11 @@ layer_0/tile_data = PackedInt32Array(393220, 65537, 0, 393221, 65537, 0, 393222,
 
 [node name="FlyingEnemy" parent="." instance=ExtResource("3_ttw7y")]
 position = Vector2(248, 288)
+script = SubResource("CSharpScript_o7fgp")
+MaxHp = 2
+Hp = 2
 MaxSpeed = 100
+Acceleration = 100
 
 [node name="Player" parent="." instance=ExtResource("3_l7mg7")]
 position = Vector2(480, 352)
-IndicatorDistance = 60.0
-MaxSpeed = 300
