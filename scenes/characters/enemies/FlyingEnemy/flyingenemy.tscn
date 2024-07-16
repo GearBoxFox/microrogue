@@ -30,3 +30,5 @@ shape = SubResource("CircleShape2D_k4fd1")
 
 [node name="AnimatedSprite2D" parent="." index="5"]
 sprite_frames = SubResource("SpriteFrames_bpnh7")
+
+[connection signal="timeout" from="PathTimer" to="." method="_on_path_timer_timeout"]

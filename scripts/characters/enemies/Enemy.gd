@@ -1,5 +1,4 @@
 extends Character
-class_name Enemy
 
 @onready var player: Character = get_tree().current_scene.get_node("Player")
 @onready var path_timer: Timer = get_node("PathTimer")
