@@ -26,4 +26,9 @@ func _get_transition() -> int:
 	
 	
 func _enter_state(_previous_state: int, new_state: int) -> void:
-	pass
+	match state:
+		states.hurt:
+			if not animation_player.is_playing():
+				animation_player.play("hurt")
+		states.chase:
+			animation_player.play("idle")

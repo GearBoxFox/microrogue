@@ -3,6 +3,7 @@ extends Character
 @export var indicator_distance: float = 75.0
 
 @onready var sword: Node2D = get_node("Sword")
+@onready var sword_hitbox: Area2D = get_node("Sword/Node/Sprite2D/Hitbox")
 @onready var sword_animation_player: AnimationPlayer = sword.get_node("SwordAnimationPlayer")
 @onready var attack_indicator: Sprite2D = get_node("AttackIndicator")
 
@@ -21,8 +22,10 @@ func _process(_delta: float) -> void:
 	if mouse_direction == Vector2.ZERO:
 		mouse_direction = prev_aim_position
 		
-	if not sword_animation_player.is_playing():
-		sword.rotation = mouse_direction.angle()
+	attack_indicator.position = mouse_direction.normalized() * indicator_distance
+		
+	sword.rotation = mouse_direction.angle()
+	sword_hitbox.knockback_direction = mouse_direction
 	
 	prev_aim_position = mouse_direction
 	

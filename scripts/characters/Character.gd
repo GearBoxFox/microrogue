@@ -3,6 +3,8 @@ class_name Character
 
 const FRICTION: float = 0.15
 
+@export var hp: int = 2
+
 @export var acceleration: int = 100
 @export var max_speed: int = 150
 
@@ -11,7 +13,7 @@ const FRICTION: float = 0.15
 
 var move_direction: Vector2 = Vector2.ZERO
 
-func _physics_process(_delta):
+func _physics_process(_delta: float):
 	move_and_slide()
 	velocity = lerp(velocity, Vector2.ZERO, FRICTION)
 
@@ -19,3 +21,8 @@ func move() -> void:
 	move_direction = move_direction.normalized()
 	velocity += move_direction * acceleration
 	velocity = velocity.limit_length(max_speed)
+	
+func take_damage(dam: int, dir: Vector2, force: int) -> void:
+	hp -= dam
+	state_machine.set_state(state_machine.states.hurt)
+	velocity += dir * force
