@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpw34anyvkcvi"]
+[gd_scene load_steps=14 format=3 uid="uid://cpw34anyvkcvi"]
 
 [ext_resource type="PackedScene" uid="uid://wqad6tofgy06" path="res://scenes/characters/enemies/enemy.tscn" id="1_4r2nl"]
+[ext_resource type="Script" path="res://scripts/characters/enemies/flyingenemy/flyingenemy.gd" id="2_knbch"]
 [ext_resource type="Script" path="res://scripts/characters/enemies/flyingenemy/FlyingEnemyFSM.gd" id="2_rfhf1"]
 [ext_resource type="Texture2D" uid="uid://cdq41f3j0w5cs" path="res://assets/enemies/flyingenemy.png" id="3_vw1mm"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="4_v2lgt"]
 
 [sub_resource type="Animation" id="Animation_742x3"]
 length = 0.001
@@ -54,6 +56,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_gblek"]
 resource_name = "hurt"
@@ -68,6 +82,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [false, true, false, true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_ga1xf"]
@@ -137,6 +163,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5whal"]
 _data = {
@@ -157,12 +195,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cj12a"]
-radius = 7.67607
-height = 19.5923
+[sub_resource type="CircleShape2D" id="CircleShape2D_nej7u"]
+radius = 9.97889
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ce64b"]
+radius = 14.0
 
 [node name="FlyingEnemy" instance=ExtResource("1_4r2nl")]
-max_hp = 3
+script = ExtResource("2_knbch")
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("2_rfhf1")
@@ -178,14 +218,25 @@ sprite_frames = SubResource("SpriteFrames_bpnh7")
 animation = &"default"
 
 [node name="CollisionShape2D" parent="." index="5"]
-position = Vector2(0, 0)
+visible = false
+position = Vector2(0, 2)
 scale = Vector2(1.30275, 1.32705)
-shape = SubResource("CapsuleShape2D_cj12a")
+shape = SubResource("CircleShape2D_nej7u")
 
-[node name="Node2D" parent="." index="6"]
+[node name="Hitbox" type="Area2D" parent="." index="6"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_v2lgt")
+knockback_force = 400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_ce64b")
+
+[node name="Node2D" parent="." index="7"]
 visible = true
 
-[node name="DeathEffect" parent="." index="7"]
+[node name="DeathEffect" parent="." index="8"]
 visible = false
 frame = 0
 

@@ -24,10 +24,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [&"idle"]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_gnbfe"]
 resource_name = "hurt"
 length = 1.2
+step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -39,6 +52,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"hurt"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
 }
 
 [sub_resource type="Animation" id="Animation_ju3ab"]
@@ -101,6 +126,30 @@ tracks/2/path = NodePath("Node/Sprite2D/Hitbox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SlashSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -227,8 +276,8 @@ visible = false
 scale = Vector2(1.5, 1.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sword/Node" index="0"]
-position = Vector2(5.96046e-08, 5.96046e-08)
-rotation = -0.785398
+position = Vector2(-4.17233e-07, -12.4444)
+rotation = -1.7366
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("7_4rwub")
 
@@ -241,6 +290,7 @@ script = ExtResource("5_p1hb3")
 position = Vector2(7.54247, -6.2854)
 rotation = 0.785398
 shape = SubResource("CapsuleShape2D_umapi")
+disabled = true
 
 [node name="SwordAnimationPlayer" type="AnimationPlayer" parent="Sword" index="1"]
 libraries = {
@@ -251,7 +301,7 @@ movie_quit_on_finish = true
 [node name="SlashSprite" type="Sprite2D" parent="Sword" index="2"]
 visible = false
 position = Vector2(27, 0)
-scale = Vector2(1.25, 1.25)
+scale = Vector2(2, 2)
 texture = ExtResource("6_1dapi")
 hframes = 3
 
@@ -263,6 +313,7 @@ sprite_frames = SubResource("SpriteFrames_bsvac")
 animation = &"idle"
 
 [node name="CollisionShape2D" parent="." index="5"]
+visible = false
 shape = SubResource("RectangleShape2D_o5mw4")
 
 [connection signal="animation_finished" from="Sword/SwordAnimationPlayer" to="." method="_on_sword_animation_player_animation_finished"]
