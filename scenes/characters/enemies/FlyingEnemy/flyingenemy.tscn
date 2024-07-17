@@ -2,10 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://wqad6tofgy06" path="res://scenes/characters/enemies/enemy.tscn" id="1_4r2nl"]
 [ext_resource type="Script" path="res://scripts/characters/enemies/flyingenemy/FlyingEnemyFSM.gd" id="2_rfhf1"]
-[ext_resource type="Texture2D" uid="uid://buglieitmu7fl" path="res://assets/attackindicator.png" id="2_ux0ea"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_k4fd1"]
-radius = 4.0348
+[ext_resource type="Texture2D" uid="uid://cdq41f3j0w5cs" path="res://assets/enemies/flyingenemy.png" id="3_vw1mm"]
 
 [sub_resource type="Animation" id="Animation_742x3"]
 length = 0.001
@@ -88,12 +85,16 @@ _data = {
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ux0ea")
+"texture": ExtResource("3_vw1mm")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cj12a"]
+radius = 7.67607
+height = 19.5923
 
 [node name="FlyingEnemy" instance=ExtResource("1_4r2nl")]
 max_hp = 3
@@ -101,17 +102,18 @@ max_hp = 3
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("2_rfhf1")
 
-[node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 0)
-scale = Vector2(1.30275, 1.32705)
-shape = SubResource("CircleShape2D_k4fd1")
-
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="1"]
 libraries = {
 "": SubResource("AnimationLibrary_5whal")
 }
 
-[node name="AnimatedSprite2D" parent="." index="5"]
+[node name="AnimatedSprite2D" parent="." index="2"]
+scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_bpnh7")
+
+[node name="CollisionShape2D" parent="." index="5"]
+position = Vector2(0, 0)
+scale = Vector2(1.30275, 1.32705)
+shape = SubResource("CapsuleShape2D_cj12a")
 
 [connection signal="timeout" from="PathTimer" to="." method="_on_path_timer_timeout"]

@@ -20,9 +20,9 @@ navigation_layers = 8
 layout_mode = 3
 anchors_preset = 0
 offset_left = -20.0
-offset_top = 14.0
+offset_top = 16.0
 offset_right = -20.0
-offset_bottom = 14.0
+offset_bottom = 16.0
 script = ExtResource("3_bxqth")
 
 [node name="HpBar" type="ColorRect" parent="Node2D" index="0"]
