@@ -35,4 +35,4 @@ func _enter_state(_previous_state: int, new_state: int) -> void:
 		states.chase:
 			animation_player.play("idle")
 		states.dead:
-			animation_player.play("hurt")
+			animation_player.play("dead")

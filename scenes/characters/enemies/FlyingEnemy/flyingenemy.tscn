@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpw34anyvkcvi"]
+[gd_scene load_steps=11 format=3 uid="uid://cpw34anyvkcvi"]
 
 [ext_resource type="PackedScene" uid="uid://wqad6tofgy06" path="res://scenes/characters/enemies/enemy.tscn" id="1_4r2nl"]
 [ext_resource type="Script" path="res://scripts/characters/enemies/flyingenemy/FlyingEnemyFSM.gd" id="2_rfhf1"]
@@ -29,6 +29,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"default"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DeathEffect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DeathEffect:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_gblek"]
@@ -74,9 +98,50 @@ tracks/1/keys = {
 "values": [&"default"]
 }
 
+[sub_resource type="Animation" id="Animation_jfxej"]
+resource_name = "dead"
+length = 1.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeathEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DeathEffect:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5whal"]
 _data = {
 "RESET": SubResource("Animation_742x3"),
+"dead": SubResource("Animation_jfxej"),
 "hurt": SubResource("Animation_gblek"),
 "idle": SubResource("Animation_ga1xf")
 }
@@ -110,10 +175,18 @@ libraries = {
 [node name="AnimatedSprite2D" parent="." index="2"]
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_bpnh7")
+animation = &"default"
 
 [node name="CollisionShape2D" parent="." index="5"]
 position = Vector2(0, 0)
 scale = Vector2(1.30275, 1.32705)
 shape = SubResource("CapsuleShape2D_cj12a")
+
+[node name="Node2D" parent="." index="6"]
+visible = true
+
+[node name="DeathEffect" parent="." index="7"]
+visible = false
+frame = 0
 
 [connection signal="timeout" from="PathTimer" to="." method="_on_path_timer_timeout"]

@@ -1,13 +1,92 @@
-[gd_scene load_steps=4 format=3 uid="uid://wqad6tofgy06"]
+[gd_scene load_steps=9 format=3 uid="uid://wqad6tofgy06"]
 
 [ext_resource type="PackedScene" uid="uid://cerw878sxixvn" path="res://scenes/characters/character.tscn" id="1_ddfi7"]
 [ext_resource type="Script" path="res://scripts/characters/enemies/Enemy.gd" id="2_kwfe0"]
 [ext_resource type="Script" path="res://scripts/characters/enemies/EnemyHpBar.gd" id="3_bxqth"]
+[ext_resource type="Texture2D" uid="uid://ch6o0bm6nu6av" path="res://assets/effects/enemydeath.png" id="4_ek1gb"]
+
+[sub_resource type="Animation" id="Animation_vwytc"]
+resource_name = "death"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathEffect:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeathEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_7gcip"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathEffect:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeathEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p3ump"]
+_data = {
+"RESET": SubResource("Animation_7gcip"),
+"death": SubResource("Animation_vwytc")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lp0f3"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}]
 
 [node name="Enemy" instance=ExtResource("1_ddfi7")]
-collision_layer = 4
-collision_mask = 5
+collision_layer = 5
+collision_mask = 15
 script = ExtResource("2_kwfe0")
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_p3ump")
+}
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_lp0f3")
+animation = &"death"
 
 [node name="PathTimer" type="Timer" parent="." index="3"]
 wait_time = 0.5
@@ -17,6 +96,7 @@ autostart = true
 navigation_layers = 8
 
 [node name="Node2D" type="Control" parent="." index="6"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -20.0
@@ -34,5 +114,10 @@ offset_top = -3.0
 offset_right = 40.0
 grow_vertical = 0
 color = Color(1, 0, 0, 1)
+
+[node name="DeathEffect" type="Sprite2D" parent="." index="7"]
+texture = ExtResource("4_ek1gb")
+hframes = 3
+frame = 1
 
 [connection signal="timeout" from="PathTimer" to="." method="OnPathTimerTimeout"]

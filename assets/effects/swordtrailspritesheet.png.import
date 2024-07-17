@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://oyho36fb26l7"
-path="res://.godot/imported/swordtrailspritesheet.png-9346b7c419e94f997595b66ce3999953.ctex"
+path="res://.godot/imported/swordtrailspritesheet.png-9517613953e3d2325dae4da152b5a2f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/swordtrailspritesheet.png"
-dest_files=["res://.godot/imported/swordtrailspritesheet.png-9346b7c419e94f997595b66ce3999953.ctex"]
+source_file="res://assets/effects/swordtrailspritesheet.png"
+dest_files=["res://.godot/imported/swordtrailspritesheet.png-9517613953e3d2325dae4da152b5a2f0.ctex"]
 
 [params]
 
