@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oyho36fb26l7"
-path="res://.godot/imported/swordtrailspritesheet.png-9346b7c419e94f997595b66ce3999953.ctex"
+uid="uid://cdq41f3j0w5cs"
+path="res://.godot/imported/flyingenemy.png-8bfd49a12540971aa8dac371743a8e84.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/swordtrailspritesheet.png"
-dest_files=["res://.godot/imported/swordtrailspritesheet.png-9346b7c419e94f997595b66ce3999953.ctex"]
+source_file="res://assets/enemies/flyingenemy.png"
+dest_files=["res://.godot/imported/flyingenemy.png-8bfd49a12540971aa8dac371743a8e84.ctex"]
 
 [params]
 

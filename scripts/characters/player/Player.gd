@@ -3,6 +3,7 @@ extends Character
 @export var indicator_distance: float = 75.0
 
 @onready var sword: Node2D = get_node("Sword")
+@onready var sword_hitbox: Area2D = get_node("Sword/Node/Sprite2D/Hitbox")
 @onready var sword_animation_player: AnimationPlayer = sword.get_node("SwordAnimationPlayer")
 @onready var attack_indicator: Sprite2D = get_node("AttackIndicator")
 
@@ -13,16 +14,18 @@ func _process(_delta: float) -> void:
 	var mouse_direction: Vector2 = Vector2.ZERO
 	
 	if use_keyboard:
-		mouse_direction = (get_global_mouse_position() - global_position)
+		mouse_direction = (get_global_mouse_position() - global_position).normalized()
 	else:
-		mouse_direction = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down") 
+		mouse_direction = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down").normalized() 
 
 	# if no input, use last aim direction
 	if mouse_direction == Vector2.ZERO:
 		mouse_direction = prev_aim_position
 		
-	if not sword_animation_player.is_playing():
-		sword.rotation = mouse_direction.angle()
+	attack_indicator.position = mouse_direction * indicator_distance
+		
+	sword.rotation = mouse_direction.angle()
+	sword_hitbox.knockback_direction = mouse_direction
 	
 	prev_aim_position = mouse_direction
 	
@@ -32,11 +35,11 @@ func _process(_delta: float) -> void:
 		sword_animation_player.play("attack")
 
 func _input(event):
-	if event is InputEventKey or InputEventMouse:
+	if (event is InputEventKey) or (event is InputEventMouse):
 		attack_indicator.hide()
 		use_keyboard = true
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	else:
+	elif (event is InputEventJoypadButton) or (event is InputEventJoypadMotion):
 		attack_indicator.show()
 		use_keyboard = false
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN

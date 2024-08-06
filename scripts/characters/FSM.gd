@@ -6,7 +6,7 @@ var previous_state: int = -1
 var state: int = -1: set = set_state
 
 @onready var parent: Character = get_parent()
-@onready var animation_player: AnimatedSprite2D = parent.get_node("AnimatedSprite2D")
+@onready var animation_player: AnimationPlayer = parent.get_node("AnimationPlayer")
 
 
 func _physics_process(delta: float) -> void:
