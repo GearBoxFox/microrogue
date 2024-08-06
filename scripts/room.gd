@@ -28,7 +28,10 @@ func _open_doors() -> void:
 		
 func _close_entrance() -> void:
 	for entry_position in entrance.get_children():
-		tilemap.set_cell(0, entry_position.global_position, 0, Vector2i(1, 0))
+		# divide by 32 to convert scaling
+		tilemap.set_cell(0, entry_position.global_position / (4.0 * 8.0), 3, Vector2i(1, 0))
+		tilemap.set_cell(0, (entry_position.global_position / (4.0 * 8.0)) + Vector2.LEFT, 3, Vector2i(1, 0))
+		tilemap.set_cell(0, (entry_position.global_position / (4.0 * 8.0)) + Vector2.RIGHT, 3, Vector2i(1, 0))
 		
 func _spawn_enemies() -> void:
 	for enemy_position in enemy_position_container.get_children():
