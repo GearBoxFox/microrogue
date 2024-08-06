@@ -5,6 +5,33 @@
 [ext_resource type="Script" path="res://scripts/characters/enemies/EnemyHpBar.gd" id="3_bxqth"]
 [ext_resource type="Texture2D" uid="uid://ch6o0bm6nu6av" path="res://assets/effects/enemydeath.png" id="4_ek1gb"]
 
+[sub_resource type="Animation" id="Animation_7gcip"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathEffect:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeathEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_vwytc"]
 resource_name = "death"
 length = 0.25
@@ -33,33 +60,6 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_7gcip"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DeathEffect:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DeathEffect:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p3ump"]
 _data = {
 "RESET": SubResource("Animation_7gcip"),
@@ -76,7 +76,7 @@ animations = [{
 
 [node name="Enemy" instance=ExtResource("1_ddfi7")]
 collision_layer = 4
-collision_mask = 5
+collision_mask = 4
 script = ExtResource("2_kwfe0")
 
 [node name="AnimationPlayer" parent="." index="1"]

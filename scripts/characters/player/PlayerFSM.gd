@@ -29,7 +29,10 @@ func _get_transition() -> int:
 			if parent.velocity.length() < 10:
 				return states.idle
 		states.hurt:
-			return states.idle
+			if (abs(parent.velocity.length()) < 0.1 * parent.max_speed):
+				return states.idle
+			else:
+				return states.hurt
 		states.dead:
 			return states.dead
 	return -1

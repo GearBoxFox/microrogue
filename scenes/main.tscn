@@ -1,6 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://m7hbql4bbe74"]
+[gd_scene load_steps=13 format=3 uid="uid://m7hbql4bbe74"]
 
+[ext_resource type="Texture2D" uid="uid://brnkrtcch1c8a" path="res://assets/ui/heart.png" id="1_8v6b3"]
+[ext_resource type="Texture2D" uid="uid://cym8p8xhki3yb" path="res://assets/ui/statusbartop.png" id="1_o30as"]
 [ext_resource type="Texture2D" uid="uid://b5m7p3ysno6m0" path="res://assets/Micro Roguelike/Tilemap/colored_tilemap_packed.png" id="2_3odoq"]
+[ext_resource type="Texture2D" uid="uid://u6egkp01sblw" path="res://assets/ui/statusbarbackground.png" id="2_bq2my"]
 [ext_resource type="PackedScene" uid="uid://bh61iiy2j8w41" path="res://scenes/characters/player/player.tscn" id="3_l7mg7"]
 [ext_resource type="PackedScene" uid="uid://cpw34anyvkcvi" path="res://scenes/characters/enemies/FlyingEnemy/flyingenemy.tscn" id="3_ttw7y"]
 
@@ -573,6 +576,35 @@ sources/1 = SubResource("TileSetAtlasSource_e1i4h")
 
 [node name="Main" type="Node"]
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Heart" type="TextureRect" parent="UI/HealthBar"]
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 64.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_8v6b3")
+
+[node name="HealthBarProgress" type="TextureProgressBar" parent="UI/HealthBar"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 2.0
+offset_right = 240.0
+offset_bottom = 66.0
+scale = Vector2(0.75, 0.75)
+value = 50.0
+texture_over = ExtResource("1_o30as")
+texture_progress = ExtResource("2_bq2my")
+tint_progress = Color(1, 0, 0, 1)
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_6ccyh")
 navigation_layers = 8
@@ -590,5 +622,4 @@ position = Vector2(480, 352)
 
 [node name="FlyingEnemy" parent="." instance=ExtResource("3_ttw7y")]
 position = Vector2(232, 232)
-collision_mask = 4
 max_speed = 75
