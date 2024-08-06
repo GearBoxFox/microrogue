@@ -199,7 +199,7 @@ animations = [{
 radius = 10.7465
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ce64b"]
-radius = 14.0
+radius = 13.0
 
 [node name="FlyingEnemy" instance=ExtResource("1_4r2nl")]
 collision_priority = 2.0
