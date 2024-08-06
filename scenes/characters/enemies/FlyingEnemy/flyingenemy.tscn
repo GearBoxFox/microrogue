@@ -204,6 +204,7 @@ radius = 14.0
 [node name="FlyingEnemy" instance=ExtResource("1_4r2nl")]
 collision_priority = 2.0
 script = ExtResource("2_knbch")
+max_speed = 100
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("2_rfhf1")
@@ -217,9 +218,6 @@ libraries = {
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_bpnh7")
 animation = &"default"
-
-[node name="NavigationAgent" parent="." index="4"]
-avoidance_enabled = true
 
 [node name="CollisionShape2D" parent="." index="5"]
 position = Vector2(0, 2)
@@ -235,9 +233,6 @@ knockback_force = 800
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_ce64b")
-
-[node name="Node2D" parent="." index="7"]
-visible = true
 
 [node name="DeathEffect" parent="." index="8"]
 visible = false
