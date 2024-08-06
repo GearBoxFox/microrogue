@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://i51y8cw0e75u"]
+
+[ext_resource type="TileSet" uid="uid://dvdv18obox15e" path="res://assets/tileset.tres" id="1_k4vnn"]
+
+[node name="Room" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_k4vnn")
+format = 2
+
+[node name="TileMap2" type="TileMap" parent="."]
+format = 2
+
+[node name="Entrance" type="Node2D" parent="."]
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="EnemyPositions" type="Node2D" parent="."]
+
+[node name="PlayerDetector" type="Area2D" parent="."]
