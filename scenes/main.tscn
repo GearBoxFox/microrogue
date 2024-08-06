@@ -39,9 +39,13 @@ texture_over = ExtResource("1_o30as")
 texture_progress = ExtResource("2_bq2my")
 tint_progress = Color(1, 0, 0, 1)
 
-[node name="Room0" parent="." instance=ExtResource("6_gg4u4")]
+[node name="Rooms" type="Node" parent="."]
+
+[node name="Room0" parent="Rooms" instance=ExtResource("6_gg4u4")]
 
 [node name="Player" parent="." instance=ExtResource("3_l7mg7")]
-position = Vector2(386, 300)
+position = Vector2(373, 416)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
 
 [connection signal="hp_changed" from="Player" to="UI" method="_update_health_bar"]

@@ -5,9 +5,6 @@ class_name Enemy
 @onready var path_timer: Timer = get_node("PathTimer")
 @onready var nav_agent: NavigationAgent2D = get_node("NavigationAgent")
 
-func _ready() -> void:
-	nav_agent.velocity_computed.connect(Callable(_on_navigation_agent_velocity_computed))
-
 func get_input() -> void:
 	if not nav_agent.is_target_reached():
 		var next_path_position: Vector2 = nav_agent.get_next_path_position()

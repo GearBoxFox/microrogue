@@ -223,7 +223,6 @@ animation = &"default"
 path_postprocessing = 1
 radius = 32.99
 time_horizon_obstacles = 2.0
-debug_enabled = true
 
 [node name="CollisionShape2D" parent="." index="5"]
 position = Vector2(0, 2)
