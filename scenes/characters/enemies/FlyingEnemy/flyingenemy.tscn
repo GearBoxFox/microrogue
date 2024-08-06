@@ -196,12 +196,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nej7u"]
-radius = 9.97889
+radius = 10.7465
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ce64b"]
 radius = 14.0
 
 [node name="FlyingEnemy" instance=ExtResource("1_4r2nl")]
+collision_priority = 2.0
 script = ExtResource("2_knbch")
 
 [node name="FiniteStateMachine" parent="." index="0"]
@@ -217,8 +218,10 @@ scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_bpnh7")
 animation = &"default"
 
+[node name="NavigationAgent" parent="." index="4"]
+avoidance_enabled = true
+
 [node name="CollisionShape2D" parent="." index="5"]
-visible = false
 position = Vector2(0, 2)
 scale = Vector2(1.30275, 1.32705)
 shape = SubResource("CircleShape2D_nej7u")
@@ -238,6 +241,5 @@ visible = true
 
 [node name="DeathEffect" parent="." index="8"]
 visible = false
-frame = 0
 
 [connection signal="timeout" from="PathTimer" to="." method="_on_path_timer_timeout"]
