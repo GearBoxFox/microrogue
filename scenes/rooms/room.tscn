@@ -5,6 +5,7 @@
 [node name="Room" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(4, 4)
 tile_set = ExtResource("1_k4vnn")
 format = 2
 

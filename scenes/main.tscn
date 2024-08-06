@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://m7hbql4bbe74"]
+[gd_scene load_steps=7 format=3 uid="uid://m7hbql4bbe74"]
 
 [ext_resource type="Texture2D" uid="uid://brnkrtcch1c8a" path="res://assets/ui/heart.png" id="1_8v6b3"]
 [ext_resource type="Texture2D" uid="uid://cym8p8xhki3yb" path="res://assets/ui/statusbartop.png" id="1_o30as"]
 [ext_resource type="Script" path="res://scenes/UI.gd" id="1_v8jyd"]
 [ext_resource type="Texture2D" uid="uid://u6egkp01sblw" path="res://assets/ui/statusbarbackground.png" id="2_bq2my"]
 [ext_resource type="PackedScene" uid="uid://bh61iiy2j8w41" path="res://scenes/characters/player/player.tscn" id="3_l7mg7"]
+[ext_resource type="PackedScene" uid="uid://c6ifw72fdu20s" path="res://scenes/rooms/room_0.tscn" id="6_gg4u4"]
 
 [node name="Main" type="Node"]
 
@@ -38,7 +39,9 @@ texture_over = ExtResource("1_o30as")
 texture_progress = ExtResource("2_bq2my")
 tint_progress = Color(1, 0, 0, 1)
 
+[node name="Room0" parent="." instance=ExtResource("6_gg4u4")]
+
 [node name="Player" parent="." instance=ExtResource("3_l7mg7")]
-position = Vector2(480, 352)
+position = Vector2(386, 300)
 
 [connection signal="hp_changed" from="Player" to="UI" method="_update_health_bar"]

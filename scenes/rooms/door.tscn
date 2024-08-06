@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyy6rpvd2sy18"]
+
+[ext_resource type="Texture2D" uid="uid://ck0kaqhdc6v7o" path="res://assets/Micro Roguelike/Tiles/Colored/tile_0036.png" id="1_ayinf"]
+[ext_resource type="Texture2D" uid="uid://cf6lvih8lu2kw" path="res://assets/Micro Roguelike/Tiles/Colored/tile_0037.png" id="2_v5aum"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4f7ng"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ayinf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_v5aum")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eeide"]
+size = Vector2(32, 32)
+
+[node name="Door" type="StaticBody2D"]
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_4f7ng")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_eeide")
