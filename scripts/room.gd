@@ -52,5 +52,8 @@ func _spawn_enemies() -> void:
 func _on_player_detector_body_entered(body: Node2D) -> void:
 	print("Spawning Room Crap")
 	player_detector.queue_free()
-	_close_entrance()
-	_spawn_enemies()
+	if num_enemies > 0:
+		_close_entrance()
+		_spawn_enemies()
+	else:
+		_open_doors()

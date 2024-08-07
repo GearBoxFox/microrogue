@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://8lkky6i1yga4"]
+
+[ext_resource type="PackedScene" uid="uid://i51y8cw0e75u" path="res://scenes/rooms/room.tscn" id="1_cq8g8"]
+[ext_resource type="PackedScene" uid="uid://dyy6rpvd2sy18" path="res://scenes/rooms/door.tscn" id="2_7jxrs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwggi"]
+size = Vector2(48, 24)
+
+[node name="SpawnRoom" instance=ExtResource("1_cq8g8")]
+
+[node name="TileMap" parent="." index="0"]
+layer_0/tile_data = PackedInt32Array(4, 196611, 5, 6, 131075, 5, 3, 65539, 0, 7, 65539, 0, 2, 65539, 0, 8, 65539, 0, 1, 65539, 0, 9, 65539, 0, 0, 3, 0, 10, 196611, 0, 65536, 3, 1, 131072, 3, 1, 196608, 3, 1, 65546, 196611, 1, 196618, 196611, 1, 131082, 196611, 1, 262144, 3, 2, 262154, 196611, 2, 262145, 65539, 0, 262146, 65539, 0, 262147, 65539, 0, 262148, 65539, 0, 262149, 65539, 0, 262150, 65539, 0, 262151, 65539, 0, 262152, 65539, 0, 262153, 65539, 0, 65537, 65539, 1, 65538, 65539, 1, 65539, 524291, 8, 65540, 65539, 1, 65541, 65539, 1, 65542, 65539, 1, 65543, 524291, 8, 65544, 65539, 1, 65545, 65539, 1, 131081, 65539, 1, 196617, 65539, 1, 196616, 65539, 1, 196615, 65539, 1, 196614, 65539, 1, 196613, 65539, 1, 196612, 65539, 1, 196611, 65539, 1, 196610, 65539, 1, 196609, 65539, 1, 131073, 65539, 1, 131074, 65539, 1, 131075, 65539, 1, 131076, 65539, 1, 131077, 65539, 1, 131078, 65539, 1, 131079, 65539, 1, 131080, 65539, 1, 5, 65539, 1)
+
+[node name="Door" parent="Doors" index="0" instance=ExtResource("2_7jxrs")]
+position = Vector2(176, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
+position = Vector2(176, 44)
+shape = SubResource("RectangleShape2D_lwggi")
+
+[node name="PlayerSpawn" type="Marker2D" parent="." index="6"]
+position = Vector2(176, 96)
