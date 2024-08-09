@@ -12,6 +12,7 @@ signal hp_changed(new_hp)
 
 @onready var state_machine: Node = get_node("FiniteStateMachine")
 @onready var animated_sprite: AnimatedSprite2D = get_node("AnimatedSprite2D")
+@onready var hurt_sound: AudioStreamPlayer = get_node("HurtSound")
 
 var move_direction: Vector2 = Vector2.ZERO
 
@@ -32,6 +33,9 @@ func take_damage(dam: int, dir: Vector2, force: int) -> void:
 	else:
 		state_machine.set_state(state_machine.states.hurt)
 		velocity = dir * force
+	
+	if not hurt_sound.playing:
+		hurt_sound.play()
 		
 func set_hp(new_hp: int) -> void:
 	hp = new_hp

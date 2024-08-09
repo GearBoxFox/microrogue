@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://wqad6tofgy06"]
+[gd_scene load_steps=9 format=3 uid="uid://wqad6tofgy06"]
 
 [ext_resource type="PackedScene" uid="uid://cerw878sxixvn" path="res://scenes/characters/character.tscn" id="1_ddfi7"]
 [ext_resource type="Script" path="res://scripts/characters/enemies/Enemy.gd" id="2_kwfe0"]
 [ext_resource type="Script" path="res://scripts/characters/enemies/EnemyHpBar.gd" id="3_bxqth"]
+[ext_resource type="AudioStream" uid="uid://2s1h3mgteubr" path="res://assets/sounds/enemyhurt.wav" id="4_0c7er"]
 
 [sub_resource type="Animation" id="Animation_7gcip"]
 length = 0.001
@@ -67,6 +68,9 @@ offset_top = -3.0
 offset_right = 40.0
 grow_vertical = 0
 color = Color(1, 0, 0, 1)
+
+[node name="HurtSound" parent="." index="8"]
+stream = ExtResource("4_0c7er")
 
 [connection signal="timeout" from="PathTimer" to="." method="OnPathTimerTimeout"]
 [connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_navigation_agent_velocity_computed"]

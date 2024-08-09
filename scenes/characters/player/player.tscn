@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bh61iiy2j8w41"]
+[gd_scene load_steps=22 format=3 uid="uid://bh61iiy2j8w41"]
 
 [ext_resource type="PackedScene" uid="uid://cerw878sxixvn" path="res://scenes/characters/character.tscn" id="1_we6rr"]
 [ext_resource type="Script" path="res://scripts/characters/player/Player.gd" id="2_ymdw2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://oyho36fb26l7" path="res://assets/effects/swordtrailspritesheet.png" id="6_1dapi"]
 [ext_resource type="Texture2D" uid="uid://by418hgrrtv3d" path="res://assets/player/playersword.png" id="7_4rwub"]
 [ext_resource type="Texture2D" uid="uid://buglieitmu7fl" path="res://assets/attackindicator.png" id="7_p1ubn"]
+[ext_resource type="AudioStream" uid="uid://bairfc8fnpirc" path="res://assets/sounds/playerhurt.wav" id="10_kkguh"]
 
 [sub_resource type="Animation" id="Animation_6xt8q"]
 length = 0.001
@@ -463,5 +464,8 @@ shape = SubResource("RectangleShape2D_o5mw4")
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="." index="7"]
+
+[node name="HurtSound" parent="." index="8"]
+stream = ExtResource("10_kkguh")
 
 [connection signal="animation_finished" from="Sword/SwordAnimationPlayer" to="." method="_on_sword_animation_player_animation_finished"]
