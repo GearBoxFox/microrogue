@@ -14,9 +14,9 @@ const END_ROOMS: Array = [
 ]
 
 const TILE_SIZE: int = 32
-const FLOOR_TILE_INDEX: Vector2i = Vector2i(11, 2)
-const LEFT_WALL_TILE_INDEX: Vector2i = Vector2(11, 2)
-const RIGHT_WALL_TILE_INDEX: Vector2i = Vector2(11, 2)
+const FLOOR_TILE_INDEX: Vector2i = Vector2i(1, 1)
+const LEFT_WALL_TILE_INDEX: Vector2i = Vector2(3, 1)
+const RIGHT_WALL_TILE_INDEX: Vector2i = Vector2(0, 1)
 
 @export var num_levels: int = 5
 
