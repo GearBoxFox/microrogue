@@ -6,6 +6,7 @@ extends Character
 @onready var sword_hitbox: Area2D = get_node("Sword/Node/Sprite2D/Hitbox")
 @onready var sword_animation_player: AnimationPlayer = sword.get_node("SwordAnimationPlayer")
 @onready var attack_indicator: Sprite2D = get_node("AttackIndicator")
+@onready var attack_timer: Timer = get_node("AttackCooldown")
 
 var use_keyboard: bool = true
 var prev_aim_position = Vector2.LEFT
@@ -30,7 +31,7 @@ func _process(_delta: float) -> void:
 	prev_aim_position = mouse_direction
 	
 	# handle attacking
-	if Input.is_action_pressed("attack") and not sword_animation_player.is_playing():
+	if Input.is_action_pressed("attack") and not sword_animation_player.is_playing() and attack_timer.is_stopped():
 		sword.show()
 		sword_animation_player.play("attack")
 
@@ -46,12 +47,14 @@ func _input(event):
 
 func get_input() -> void:
 	move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	
-
-
 
 func _on_sword_animation_player_animation_finished(anim_name):
 	if anim_name == "attack":
 		sword.hide()
 		sword.get_node("Node").rotation = 0
 		
+func switch_camera() -> void:
+	var main_scene_camera: Camera2D = get_parent().get_node("Camera2D")
+	main_scene_camera.position = position
+	main_scene_camera.enabled = true
+	get_node("Camera2D").enabled = false
