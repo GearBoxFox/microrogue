@@ -2,6 +2,7 @@ extends Node
 
 const SPAWN_ROOMS: Array = [
 	preload("res://scenes/rooms/spawn_room.tscn"),
+	preload("res://scenes/rooms/spawn_room_1.tscn")
 ]
 const INTERMEDIATE_ROOMS: Array = [
 	preload("res://scenes/rooms/room_0.tscn"),
@@ -11,6 +12,7 @@ const INTERMEDIATE_ROOMS: Array = [
 ]
 const END_ROOMS: Array = [
 	preload("res://scenes/rooms/exit_room.tscn"),
+	preload("res://scenes/rooms/exit_room_1.tscn")
 ]
 
 const TILE_SIZE: int = 32
@@ -67,3 +69,12 @@ func _spawn_rooms() -> void:
 			
 		add_child(room)
 		previous_room = room
+		
+func _next_floor() -> void:
+	#clear existing rooms
+	for child in get_children():
+		remove_child(child)
+	
+	# increase difficulty and regenerate rooms
+	num_levels += 1
+	_spawn_rooms()
