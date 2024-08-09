@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bh61iiy2j8w41"]
+[gd_scene load_steps=22 format=3 uid="uid://bh61iiy2j8w41"]
 
 [ext_resource type="PackedScene" uid="uid://cerw878sxixvn" path="res://scenes/characters/character.tscn" id="1_we6rr"]
 [ext_resource type="Script" path="res://scripts/characters/player/Player.gd" id="2_ymdw2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://oyho36fb26l7" path="res://assets/effects/swordtrailspritesheet.png" id="6_1dapi"]
 [ext_resource type="Texture2D" uid="uid://by418hgrrtv3d" path="res://assets/player/playersword.png" id="7_4rwub"]
 [ext_resource type="Texture2D" uid="uid://buglieitmu7fl" path="res://assets/attackindicator.png" id="7_p1ubn"]
+[ext_resource type="AudioStream" uid="uid://bairfc8fnpirc" path="res://assets/sounds/playerhurt.wav" id="10_kkguh"]
 
 [sub_resource type="Animation" id="Animation_6xt8q"]
 length = 0.001
@@ -71,6 +72,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:collision_mask")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
 }
 
 [sub_resource type="Animation" id="Animation_jf0bp"]
@@ -144,9 +157,12 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.7),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(1.65, 1.7),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"switch_camera"
+}, {
 "args": [],
 "method": &"queue_free"
 }]
@@ -179,6 +195,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:collision_mask")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 5]
 }
 
 [sub_resource type="Animation" id="Animation_ju3ab"]
@@ -324,6 +352,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../AttackCooldown")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [-1],
+"method": &"start"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sgrae"]
 _data = {
@@ -374,6 +416,7 @@ size = Vector2(16.1392, 18.968)
 [node name="Player" instance=ExtResource("1_we6rr")]
 scale = Vector2(0.75, 0.75)
 collision_mask = 5
+collision_priority = 2.0
 script = ExtResource("2_ymdw2")
 indicator_distance = 75.0
 max_hp = 4
@@ -403,6 +446,7 @@ texture = ExtResource("7_4rwub")
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("5_p1hb3")
+knockback_force = 350
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/Node/Sprite2D/Hitbox" index="0"]
 position = Vector2(7.54247, -6.2854)
@@ -436,5 +480,14 @@ shape = SubResource("RectangleShape2D_o5mw4")
 
 [node name="DeathEffect" parent="." index="6"]
 visible = false
+
+[node name="Camera2D" type="Camera2D" parent="." index="7"]
+
+[node name="HurtSound" parent="." index="8"]
+stream = ExtResource("10_kkguh")
+
+[node name="AttackCooldown" type="Timer" parent="." index="9"]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="animation_finished" from="Sword/SwordAnimationPlayer" to="." method="_on_sword_animation_player_animation_finished"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bby8165s118dx"]
+
+[ext_resource type="Texture2D" uid="uid://gfjg01obx46s" path="res://assets/Micro Roguelike/Tiles/Colored/tile_0052.png" id="1_8owk3"]
+[ext_resource type="Script" path="res://scripts/Stairs.gd" id="1_ryp1h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wlxts"]
+size = Vector2(32, 32)
+
+[node name="Stairs" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ryp1h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_8owk3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wlxts")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

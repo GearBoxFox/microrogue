@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://dicdtn0yaud"]
+
+[ext_resource type="Texture2D" uid="uid://ch6o0bm6nu6av" path="res://assets/effects/enemydeath.png" id="1_qw2k2"]
+[ext_resource type="Script" path="res://scripts/characters/enemies/spawnexplosion.gd" id="2_w7bvc"]
+
+[sub_resource type="Animation" id="Animation_vnnmv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mvihy"]
+resource_name = "spawn"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ic5w2"]
+_data = {
+"RESET": SubResource("Animation_vnnmv"),
+"spawn": SubResource("Animation_mvihy")
+}
+
+[node name="Spawnexplosion" type="Sprite2D"]
+texture = ExtResource("1_qw2k2")
+hframes = 3
+script = ExtResource("2_w7bvc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ic5w2")
+}
+movie_quit_on_finish = true

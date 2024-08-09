@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://m7hbql4bbe74"]
+
+[ext_resource type="Texture2D" uid="uid://brnkrtcch1c8a" path="res://assets/ui/heart.png" id="1_8v6b3"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_lotap"]
+[ext_resource type="Texture2D" uid="uid://cym8p8xhki3yb" path="res://assets/ui/statusbartop.png" id="1_o30as"]
+[ext_resource type="Script" path="res://scripts/UI.gd" id="1_v8jyd"]
+[ext_resource type="Texture2D" uid="uid://u6egkp01sblw" path="res://assets/ui/statusbarbackground.png" id="2_bq2my"]
+[ext_resource type="PackedScene" uid="uid://bh61iiy2j8w41" path="res://scenes/characters/player/player.tscn" id="3_l7mg7"]
+[ext_resource type="Script" path="res://scripts/Rooms.gd" id="5_vln1u"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_lotap")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("1_v8jyd")
+
+[node name="HealthBar" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Heart" type="TextureRect" parent="UI/HealthBar"]
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 64.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_8v6b3")
+
+[node name="HealthBarProgress" type="TextureProgressBar" parent="UI/HealthBar"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 2.0
+offset_right = 240.0
+offset_bottom = 66.0
+scale = Vector2(0.75, 0.75)
+value = 50.0
+texture_over = ExtResource("1_o30as")
+texture_progress = ExtResource("2_bq2my")
+tint_progress = Color(1, 0, 0, 1)
+
+[node name="Rooms" type="Node" parent="."]
+script = ExtResource("5_vln1u")
+
+[node name="Player" parent="." instance=ExtResource("3_l7mg7")]
+position = Vector2(373, 416)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[connection signal="hp_changed" from="Player" to="UI" method="_update_health_bar"]

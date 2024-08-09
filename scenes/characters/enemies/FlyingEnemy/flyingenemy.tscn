@@ -68,6 +68,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_jfxej"]
 resource_name = "dead"
@@ -120,6 +132,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_gblek"]
 resource_name = "hurt"
@@ -142,6 +166,18 @@ tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -196,14 +232,16 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nej7u"]
-radius = 10.7465
+radius = 9.21128
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ce64b"]
-radius = 14.0
+radius = 13.0
 
 [node name="FlyingEnemy" instance=ExtResource("1_4r2nl")]
+collision_mask = 4
 collision_priority = 2.0
 script = ExtResource("2_knbch")
+max_speed = 100
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("2_rfhf1")
@@ -219,7 +257,10 @@ sprite_frames = SubResource("SpriteFrames_bpnh7")
 animation = &"default"
 
 [node name="NavigationAgent" parent="." index="4"]
-avoidance_enabled = true
+path_postprocessing = 1
+avoidance_enabled = false
+radius = 32.99
+time_horizon_obstacles = 2.0
 
 [node name="CollisionShape2D" parent="." index="5"]
 position = Vector2(0, 2)
@@ -227,6 +268,7 @@ scale = Vector2(1.30275, 1.32705)
 shape = SubResource("CircleShape2D_nej7u")
 
 [node name="Hitbox" type="Area2D" parent="." index="6"]
+visible = false
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_v2lgt")
@@ -235,9 +277,6 @@ knockback_force = 800
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_ce64b")
-
-[node name="Node2D" parent="." index="7"]
-visible = true
 
 [node name="DeathEffect" parent="." index="8"]
 visible = false
