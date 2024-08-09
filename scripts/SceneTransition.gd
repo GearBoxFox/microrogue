@@ -9,4 +9,5 @@ func start_transition_to(path_to_scene: String) -> void:
 	animation_player.play("change_scene")
 	
 func change_scene() -> void:
-	assert(get_tree().change_scene(new_scene) == OK)
+	SaveData.num_levels += 1
+	assert(get_tree().change_scene_to_file(new_scene) == OK)

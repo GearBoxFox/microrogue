@@ -20,11 +20,12 @@ const FLOOR_TILE_INDEX: Vector2i = Vector2i(1, 1)
 const LEFT_WALL_TILE_INDEX: Vector2i = Vector2(3, 1)
 const RIGHT_WALL_TILE_INDEX: Vector2i = Vector2(0, 1)
 
-@export var num_levels: int = 5
+var num_levels: int
 
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
 
 func _ready() -> void:
+	num_levels = SaveData.num_levels
 	_spawn_rooms()
 	
 func _spawn_rooms() -> void:

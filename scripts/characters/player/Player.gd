@@ -11,6 +11,9 @@ extends Character
 var use_keyboard: bool = true
 var prev_aim_position = Vector2.LEFT
 
+func _ready() -> void:
+	hp = SaveData.hp
+
 func _process(_delta: float) -> void:
 	var mouse_direction: Vector2 = Vector2.ZERO
 	
