@@ -39,18 +39,17 @@ func _spawn_enemies() -> void:
 		
 		# connect death signal
 		var __ = enemy.connect("tree_exited", Callable(_on_enemy_killed))
-		enemy.global_position = enemy_position.global_position
+		enemy.global_position = enemy_position.position
 		call_deferred("add_child", enemy)
 		
 		# create spawn explosion
 		var spawn_explosion: Sprite2D = SPAWN_EXPLOSION_SCENE.instantiate()
-		spawn_explosion.global_position = enemy_position.global_position
+		spawn_explosion.global_position = enemy_position.position
 		call_deferred("add_child", spawn_explosion)
 
 
 
 func _on_player_detector_body_entered(body: Node2D) -> void:
-	print("Spawning Room Crap")
 	player_detector.queue_free()
 	if num_enemies > 0:
 		_close_entrance()

@@ -43,6 +43,7 @@ tint_progress = Color(1, 0, 0, 1)
 
 [node name="Rooms" type="Node" parent="."]
 script = ExtResource("5_vln1u")
+num_levels = null
 
 [node name="Player" parent="." instance=ExtResource("3_l7mg7")]
 position = Vector2(373, 416)

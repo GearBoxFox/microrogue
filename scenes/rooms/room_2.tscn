@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjydpgl1ye6sk"]
+[gd_scene load_steps=4 format=3 uid="uid://cjydpgl1ye6sk"]
 
 [ext_resource type="PackedScene" uid="uid://i51y8cw0e75u" path="res://scenes/rooms/room.tscn" id="1_qqqju"]
 [ext_resource type="PackedScene" uid="uid://dyy6rpvd2sy18" path="res://scenes/rooms/door.tscn" id="2_663xt"]
-[ext_resource type="PackedScene" uid="uid://bh61iiy2j8w41" path="res://scenes/characters/player/player.tscn" id="3_52xoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wuecn"]
 size = Vector2(32, 32)
@@ -27,6 +26,3 @@ position = Vector2(272, 144)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(336, 352)
 shape = SubResource("RectangleShape2D_wuecn")
-
-[node name="Player" parent="." index="6" instance=ExtResource("3_52xoq")]
-position = Vector2(336, 432)
