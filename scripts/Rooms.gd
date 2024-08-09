@@ -46,7 +46,6 @@ func _spawn_rooms() -> void:
 			
 			var corridor_height: int = (randi() % 5) + 2
 			for y in corridor_height:
-				print(str(exit_tile_pos + Vector2(0, -y)))
 				# build the exit
 				previous_room_tilemap.set_cell(0, 
 				(exit_tile_pos + Vector2(-1, -y)), 

@@ -47,6 +47,4 @@ script = ExtResource("5_vln1u")
 [node name="Player" parent="." instance=ExtResource("3_l7mg7")]
 position = Vector2(373, 416)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-
 [connection signal="hp_changed" from="Player" to="UI" method="_update_health_bar"]
